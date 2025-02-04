@@ -53,6 +53,22 @@ io.on("connection", (socket) => {
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+app.get("/ping", (req, res) => {
+    res.status(200).send("Server is alive");
+});
+
+const keepAliveInterval = 10 * 60 * 1000; // Every 10 minutes
+ // Every 14 minutes
+
+setInterval(() => {
+    http.get("https://your-render-app.onrender.com/ping", (res) => {
+        console.log("Ping response status:", res.statusCode);
+    }).on("error", (err) => {
+        console.error("Ping error:", err.message);
+    });
+}, keepAliveInterval);
+
+
 
 server.listen(3000, () => {
   console.log("Server running on port 3000");
