@@ -57,16 +57,6 @@ app.get("/ping", (req, res) => {
     res.status(200).send("Server is alive");
 });
 
-const keepAliveInterval = 10 * 60 * 1000; // Every 10 minutes
- // Every 14 minutes
-
-setInterval(() => {
-    http.get("https://video-call-backend-x317.onrender.com/ping", (res) => {
-        console.log("Ping response status:", res.statusCode);
-    }).on("error", (err) => {
-        console.error("Ping error:", err.message);
-    });
-}, keepAliveInterval);
 
 
 
