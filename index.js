@@ -35,8 +35,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("ice-candidate", ({ candidate, targetUserId }) => {
-    socket.to(targetUserId).emit("ice-candidate", candidate);
+    console.log(`Received ICE candidate from ${socket.id} to ${targetUserId}`, candidate);
+    io.to(targetUserId).emit("ice-candidate", candidate);
   });
+  
 
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
